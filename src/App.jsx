@@ -6,13 +6,25 @@ import { productsData } from "./constants/productsData";
 import { settingsData } from "./constants/settingsData";
 import { overviewData, recentSalesData, topProducts } from "./constants";
 import { Home } from "lucide-react";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 function App() {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
     return (
         <Router>
             <div className="flex h-screen">
+                {/* Mobile Menu Button */}
+                <button
+                    className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-[#1E1E2D] text-white"
+                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                >
+                    {isSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+
                 {/* Sidebar */}
-                <div className="w-64 bg-[#1E1E2D] text-white">
+                <div className={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-[#1E1E2D] text-white transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform duration-300 ease-in-out`}>
                     <div className="p-6 border-b border-gray-700">
                         <div className="flex items-center space-x-3">
                             <div className="w-10 h-10 flex items-center justify-center bg-[#3699FF] rounded-lg">
@@ -36,6 +48,7 @@ function App() {
                                             key={link.path}
                                             to={link.path}
                                             className="flex items-center px-4 py-2 text-base text-gray-300 hover:bg-[#2D2D3F] hover:text-white"
+                                            onClick={() => setIsSidebarOpen(false)}
                                         >
                                             <link.icon className="w-6 h-6 mr-3" />
                                             {link.label}
@@ -48,7 +61,7 @@ function App() {
                 </div>
 
                 {/* Main Content */}
-                <div className="flex-1 p-8 bg-[#F5F8FA] overflow-auto">
+                <div className="flex-1 p-4 lg:p-8 bg-[#F5F8FA] overflow-auto">
                     <Routes>
                         <Route path="/" element={<Dashboard />} />
                         <Route path="/analytics" element={<Analytics data={dashboardData} />} />
@@ -71,20 +84,14 @@ function App() {
 function Dashboard() {
     return (
         <div>
-            <div className="p-6 border-b border-gray-700">
-                <h1 className="text-3xl font-bold tracking-tight text-white">
-                    <span className="text-[#3699FF]">Dash</span>board
-                </h1>
-                <p className="mt-2 text-sm text-gray-400">Welcome to your control panel</p>
-            </div>
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
                 <div>
-                    <h1 className="text-4xl font-bold tracking-tight text-[#181C32]">
+                    <h1 className="text-3xl lg:text-4xl font-bold tracking-tight text-[#181C32]">
                         Dashboard <span className="text-[#3699FF]">Overview</span>
                     </h1>
-                    <p className="mt-2 text-lg text-gray-600">Welcome back! Here's what's happening with your store today.</p>
+                    <p className="mt-2 text-base lg:text-lg text-gray-600">Welcome back! Here's what's happening with your store today.</p>
                 </div>
-                <div className="flex items-center space-x-4">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mt-4 lg:mt-0">
                     <button className="px-4 py-2 text-sm font-semibold text-white bg-[#3699FF] rounded-lg hover:bg-[#187DE4] transition-colors">
                         Download Report
                     </button>
@@ -95,9 +102,9 @@ function Dashboard() {
             </div>
             
             {/* Overview Chart */}
-            <div className="bg-white p-8 rounded-xl shadow-sm mb-8">
-                <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-[#181C32]">Overview</h2>
+            <div className="bg-white p-4 lg:p-8 rounded-xl shadow-sm mb-8">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
+                    <h2 className="text-xl lg:text-2xl font-bold text-[#181C32] mb-4 lg:mb-0">Overview</h2>
                     <div className="flex items-center space-x-2">
                         <span className="px-3 py-1 text-sm font-medium text-[#3699FF] bg-blue-50 rounded-full">Monthly</span>
                         <span className="px-3 py-1 text-sm font-medium text-gray-500 bg-gray-50 rounded-full">Weekly</span>
@@ -105,7 +112,7 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className="h-64">
-                    <div className="grid grid-cols-12 gap-4">
+                    <div className="grid grid-cols-12 gap-2 lg:gap-4">
                         {overviewData.map((item) => (
                             <div key={item.name} className="col-span-1">
                                 <div className="h-full flex flex-col justify-end">
@@ -114,7 +121,7 @@ function Dashboard() {
                                         style={{ height: `${(item.total / 6000) * 100}%` }}
                                     ></div>
                                 </div>
-                                <p className="text-sm text-center mt-2 text-gray-500">{item.name}</p>
+                                <p className="text-xs lg:text-sm text-center mt-2 text-gray-500">{item.name}</p>
                             </div>
                         ))}
                     </div>
@@ -122,15 +129,15 @@ function Dashboard() {
             </div>
 
             {/* Recent Sales */}
-            <div className="bg-white p-8 rounded-xl shadow-sm mb-8">
+            <div className="bg-white p-4 lg:p-8 rounded-xl shadow-sm mb-8">
                 <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-[#181C32]">Recent Sales</h2>
+                    <h2 className="text-xl lg:text-2xl font-bold text-[#181C32]">Recent Sales</h2>
                     <button className="text-[#3699FF] hover:text-[#187DE4] font-semibold">View All</button>
                 </div>
                 <div className="space-y-4">
                     {recentSalesData.map((sale) => (
-                        <div key={sale.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                            <div className="flex items-center">
+                        <div key={sale.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-gray-50 rounded-lg">
+                            <div className="flex items-center mb-4 sm:mb-0">
                                 <img src={sale.image} alt={sale.name} className="w-12 h-12 rounded-full mr-4" />
                                 <div>
                                     <p className="text-lg font-medium text-[#181C32]">{sale.name}</p>
@@ -144,15 +151,15 @@ function Dashboard() {
             </div>
 
             {/* Top Products */}
-            <div className="bg-white p-8 rounded-xl shadow-sm">
+            <div className="bg-white p-4 lg:p-8 rounded-xl shadow-sm">
                 <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-[#181C32]">Top Products</h2>
+                    <h2 className="text-xl lg:text-2xl font-bold text-[#181C32]">Top Products</h2>
                     <button className="text-[#3699FF] hover:text-[#187DE4] font-semibold">View All</button>
                 </div>
                 <div className="space-y-4">
                     {topProducts.map((product) => (
-                        <div key={product.number} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                            <div className="flex items-center">
+                        <div key={product.number} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-gray-50 rounded-lg">
+                            <div className="flex items-center mb-4 sm:mb-0">
                                 <span className="w-10 h-10 flex items-center justify-center bg-[#3699FF] text-white rounded-full mr-4 text-lg">
                                     {product.number}
                                 </span>
