@@ -1,0 +1,77 @@
+export const customerData = {
+    recentCustomers: [
+        {
+            id: 1,
+            name: "Aarush",
+            email: "aarush@email.com",
+            joinDate: "2024-03-15",
+            totalOrders: 5,
+            totalSpent: "₹25,000",
+            status: "Active",
+            lastOrder: "2024-03-14",
+        },
+        {
+            id: 2,
+            name: "Priya Patel",
+            email: "priya.patel@email.com",
+            joinDate: "2024-03-14",
+            totalOrders: 3,
+            totalSpent: "₹15,000",
+            status: "Active",
+            lastOrder: "2024-03-13",
+        },
+        {
+            id: 3,
+            name: "Amit Kumar",
+            email: "amit.kumar@email.com",
+            joinDate: "2024-03-13",
+            totalOrders: 7,
+            totalSpent: "₹45,000",
+            status: "Active",
+            lastOrder: "2024-03-12",
+        },
+    ],
+    customerStats: {
+        totalCustomers: 1250,
+        newThisMonth: 45,
+        activeCustomers: 850,
+        averageOrderValue: "₹3,500",
+        totalRevenue: "₹43,75,000",
+    },
+    customerSegments: [
+        {
+            id: 1,
+            name: "Premium",
+            count: 150,
+            averageSpend: "₹50,000",
+        },
+        {
+            id: 2,
+            name: "Regular",
+            count: 500,
+            averageSpend: "₹25,000",
+        },
+        {
+            id: 3,
+            name: "New",
+            count: 600,
+            averageSpend: "₹10,000",
+        },
+    ],
+    customerFeedback: [
+        {
+            id: 1,
+            customerName: "Aarush",
+            rating: 5,
+            comment: "Excellent service and fast delivery!",
+            date: "2024-03-15",
+        },
+        {
+            id: 2,
+            customerName: "Priya Patel",
+            rating: 4,
+            comment: "Good products but delivery was a bit slow",
+            date: "2024-03-14",
+        },
+    ],
+}; 

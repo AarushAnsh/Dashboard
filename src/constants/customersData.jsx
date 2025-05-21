@@ -1,0 +1,43 @@
+export const customersData = {
+    totalCustomers: 2350,
+    newCustomers: 150,
+    verifiedCustomers: 2100,
+    customerList: [
+        {
+            id: 1,
+            name: "Aarush",
+            email: "aarush@example.com",
+            phone: "+91 98765 43210",
+            status: "Verified",
+            joinDate: "2024-01-15",
+            totalOrders: 12,
+            totalSpent: "₹45,000",
+        },
+        {
+            id: 2,
+            name: "Priya Patel",
+            email: "priya.patel@example.com",
+            phone: "+91 87654 32109",
+            status: "New",
+            joinDate: "2024-03-01",
+            totalOrders: 2,
+            totalSpent: "₹8,500",
+        },
+        {
+            id: 3,
+            name: "Amit Kumar",
+            email: "amit.kumar@example.com",
+            phone: "+91 76543 21098",
+            status: "Verified",
+            joinDate: "2023-12-20",
+            totalOrders: 8,
+            totalSpent: "₹32,000",
+        },
+    ],
+    customerStats: {
+        averageOrderValue: "₹3,500",
+        repeatPurchaseRate: "65%",
+        customerSatisfaction: "4.5/5",
+        topSpendingCustomer: "Aarush",
+    },
+}; 
